@@ -121,5 +121,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8a17ce852e8ea84ea354a605009085b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timer: 0
-  enemy: {fileID: 5122906844655960948, guid: c47dc9a7e9e9ef242881cd2370b5f17e, type: 3}
+  genericPrefab: {fileID: 5122906844655960948, guid: c47dc9a7e9e9ef242881cd2370b5f17e, type: 3}
+  player: {fileID: 0}

@@ -1,29 +1,24 @@
 using System.Collections.Generic;
 using EnemyType;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemySpawner : MonoBehaviour
 {
     //enemies
-    NormalEnemy normEnem;
-    FireEnemy fireEnem;
-    MonoEnemy monoEnem;
-    MetalEnemy metalEnem;
-
-    //variables
     [SerializeField]
-    private GameObject enemy;
+    private GameObject genericPrefab;
+
+    [SerializeField]
+    private GameObject player;
+
     private float timer;
     
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        normEnem = new NormalEnemy(5, 120);
-        fireEnem = new FireEnemy(5, 120);
-        monoEnem = new MonoEnemy(5, 120);
-        metalEnem = new MetalEnemy(5, 120);
-
         timer = 5;
     }
 
@@ -32,8 +27,16 @@ public class EnemySpawner : MonoBehaviour
     {
         timer -= Time.deltaTime;
         if (timer <= 0){
-            //assume "enemy" takes values from one of the enemy types above
-            Instantiate(enemy, transform.position, Quaternion.identity);
+
+            //spawn enemy
+            GameObject enemy = Instantiate(genericPrefab, 
+            new Vector3(transform.position.x, 2.5f, transform.position.z), Quaternion.identity);
+
+            //enemy type
+            ParentEnemy script = enemy.AddComponent<NormalEnemy>();
+            script.MakeEnemy(5,10);
+            script.Player = player;
+
             timer = 10;
         }
 
@@ -57,21 +60,46 @@ namespace EnemyType {
     //parent enemy - enemies inherit from this
     public class ParentEnemy : MonoBehaviour{
         public EnemyStats enemy;
-        
-        public ParentEnemy(int h, int s)
-        {
-            enemy = new(h, s);
+
+        [SerializeField]
+        private NavMeshAgent enemyNav;
+
+        //getter setter for player gameobject
+        public GameObject Player{ get; set; }
+
+        public virtual void MakeEnemy(int h, int s){
+            enemy.hp = h;
+            enemy.spd = s;   
         }
 
         public virtual void TakeDamage(string bullType, int bullDmg){
             enemy.hp -= bullDmg;
         }
+
+        void Start()
+        {
+            enemyNav = GetComponent<NavMeshAgent>();
+            enemyNav.speed = enemy.spd;
+        }
+        
+        void Update()
+        {
+            enemyNav.SetDestination(Player.transform.position);
+
+            //if this then die
+            if (1 == 1){
+                //TakeDamage();
+            }
+        }
+        
     }
 
     //normal enemy - takes neutral damage / ignores ghost damage
     public class NormalEnemy : ParentEnemy{
 
-        public NormalEnemy(int h, int s) : base(h, s){}
+        public override void MakeEnemy(int h, int s){
+            base.MakeEnemy(h, s);
+        }
 
         public override void TakeDamage(string bullType, int bullDmg){
 
@@ -93,7 +121,8 @@ namespace EnemyType {
         public List<string> weakness = new();
         public List<string> resist = new();
 
-        public FireEnemy(int h, int s): base(h, s){
+        public override void MakeEnemy(int h, int s){
+            base.MakeEnemy(h, s);
             weakness.Add("Water");
             resist.Add("Metal");
         }
@@ -132,7 +161,8 @@ namespace EnemyType {
         //weakness list
         public List<string> weakness = new();
 
-        public MonoEnemy(int h, int s): base(h, s){
+        public override void MakeEnemy(int h, int s){
+            base.MakeEnemy(h, s);
             weakness.Add("Pastel");
             weakness.Add("Strike");
         }
@@ -161,7 +191,8 @@ namespace EnemyType {
         //weakness list
         public List<string> weakness = new();
 
-        public MetalEnemy(int h, int s): base(h, s){
+        public override void MakeEnemy(int h, int s){
+            base.MakeEnemy(h, s);
             weakness.Add("Electric");
             weakness.Add("Strike");
         }
