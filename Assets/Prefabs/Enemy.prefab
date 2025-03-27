@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6680383615749946066}
   - component: {fileID: 410959888543354365}
   - component: {fileID: 3071924131812183764}
-  - component: {fileID: 8656677206319376529}
+  - component: {fileID: -3515381404297659845}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -132,7 +132,7 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &8656677206319376529
+--- !u!114 &-3515381404297659845
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,8 +141,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 5122906844655960948}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0bce1b4997ee8dd4bb5d6b87706730e3, type: 3}
+  m_Script: {fileID: 11500000, guid: 9ab22d0111562284d9ed18f5467fdee1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
-  player: {fileID: 3071924131812183764}
+  enemy: {fileID: 3071924131812183764}
+  player: {fileID: 4812727728259947076, guid: 986ff0c732b97fe4590e4c9b09df8594, type: 3}

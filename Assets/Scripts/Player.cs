@@ -2,9 +2,12 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class Player : MonoBehaviour
-{
-    public Camera cam;
-    public NavMeshAgent player;
+{   
+    [SerializeField]
+    private Camera cam;
+
+    [SerializeField]
+    private NavMeshAgent player;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
