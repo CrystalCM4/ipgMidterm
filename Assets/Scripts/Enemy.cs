@@ -9,14 +9,11 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private GameObject player;
 
-    //stats - have to be read from EnemySpawner
-    public int hp;
-    public int spd;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //TakeDamage();
+        
     }
 
     // Update is called once per frame

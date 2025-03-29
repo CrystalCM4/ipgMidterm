@@ -4,10 +4,13 @@ public class Bullets : MonoBehaviour
 {   
     private int projectileSpeed = 50;
     private float timer = 0;
+    private float rotate = 0;
 
     private GameObject FollowPlayer{ get; set; }
 
-    public GameObject player;
+    [SerializeField]
+    private GameObject subGO;
+
 
     [HideInInspector]
     public string bullType;
@@ -18,7 +21,8 @@ public class Bullets : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        FollowPlayer = player;
+        FollowPlayer = Player.playerRef;
+        subGO = transform.GetChild(0).gameObject;
     }
 
     // Update is called once per frame
@@ -53,6 +57,12 @@ public class Bullets : MonoBehaviour
 
                 bullType = "Pastel";
                 bullDmg = 4;
+
+                //fade out
+                Color laser = subGO.GetComponent<SpriteRenderer>().color;
+                laser.a -= 10 * Time.deltaTime;
+                subGO.GetComponent<SpriteRenderer>().color = laser;
+
                 if (timer >= 0.1){
                     Destroy(gameObject);
                 }
@@ -75,6 +85,13 @@ public class Bullets : MonoBehaviour
 
                 bullType = "Metal";
                 bullDmg = 4;
+
+                
+                //projectileSpeed = 0;
+
+                rotate -= 400 * Time.deltaTime;
+                subGO.transform.rotation = Quaternion.Euler(0, 0, rotate);
+
                 if (timer <= 0.6){
                     transform.Translate(0.0f, 0.0f, projectileSpeed * Time.deltaTime);
                 }
@@ -88,9 +105,9 @@ public class Bullets : MonoBehaviour
             //rain
             case 5:
 
-                transform.position = new Vector3(FollowPlayer.transform.position.x + 50,
+                transform.position = new Vector3(FollowPlayer.transform.position.x,
                 FollowPlayer.transform.position.y, FollowPlayer.transform.position.z);
-                
+
                 bullType = "Ghost";
                 bullDmg = 20;
                 if (timer >= 0.5){
@@ -119,10 +136,14 @@ public class Bullets : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if ((col.gameObject.CompareTag("Wall") || col.gameObject.CompareTag("Character"))
-        && Player.character == 4){
+        if (col.gameObject.CompareTag("Character") && Player.character == 4){
             Destroy(gameObject);
             timer = 0;
+        }
+
+        if (col.gameObject.CompareTag("Wall") && Player.character == 4){
+            if (timer >= 0.6) Destroy(gameObject);
+            else timer = 0.6f;
         }
     }
 }

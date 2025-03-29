@@ -102,11 +102,15 @@ namespace EnemyType {
         
     }
 
-    //normal enemy - takes neutral damage / ignores ghost damage
+    //normal enemy - weak to strike damage / ignores ghost damage
     public class NormalEnemy : ParentEnemy{
+        
+        //weakness list
+        public List<string> weakness = new();
 
         public override void MakeEnemy(int h, int s){
             base.MakeEnemy(h, s);
+            weakness.Add("Strike");
         }
 
         public override void TakeDamage(string bullType, int bullDmg){
@@ -117,6 +121,17 @@ namespace EnemyType {
             if (bullType.Equals("Ghost")){
                 totalDmg = 0;
             }
+
+            //check if enemy is weak to player's current bullet type
+            for (int i = 0; i < weakness.Count; i ++){
+                if (weakness[i].Equals(bullType)){
+                    
+                    //weakness damage is doubled
+                    totalDmg *= 2;
+
+                }
+            }
+            
 
             base.TakeDamage(bullType, totalDmg);
         }

@@ -10,6 +10,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     private NavMeshAgent player;
 
+    [HideInInspector]
+    public static GameObject playerRef;
+
     public GameObject bull1;
     public GameObject bull2;
     public GameObject bull3;
@@ -31,6 +34,7 @@ public class Player : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        playerRef = gameObject;
         character = 1;
     }
 
@@ -40,7 +44,7 @@ public class Player : MonoBehaviour
         //lev stuff
         GameObject secBull;
         GameObject thirdBull;
-        bullTarg = new Vector3(1, transform.position.y, transform.position.z);
+        bullTarg = new Vector3(100, transform.position.y, transform.position.z);
         atkSpdTimer += Time.deltaTime;
 
         //right click to move
@@ -90,43 +94,30 @@ public class Player : MonoBehaviour
         //change characters
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            print("1 pressed");
-
             character = 1;
-
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            print("2 pressed");
-
             ResetBubbles();
             character = 2;
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
-            print("3 pressed");
-
             ResetBubbles();
             character = 3;
         }
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
-            print("4 pressed");
-
             ResetBubbles();
             character = 4;
         }
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
-            print("5 pressed");
-
             ResetBubbles();
             character = 5;
         }
         if (Input.GetKeyDown(KeyCode.Alpha6))
         {
-            print("6 pressed");
-
             ResetBubbles();
             character = 6;
         }
@@ -195,8 +186,8 @@ public class Player : MonoBehaviour
                 atkSpd = 1f;
                 timer = 0;
                 GameObject punch;
-                punch = Instantiate(bull6, new Vector3(transform.position.x + 15,
-                3, transform.position.z), Quaternion.Euler(0,90,0));
+                punch = Instantiate(bull6, new Vector3(transform.position.x + 25,
+                4, transform.position.z), Quaternion.Euler(0,90,0));
                 break;
         }
     }
