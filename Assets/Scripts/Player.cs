@@ -23,6 +23,8 @@ public class Player : MonoBehaviour
     [HideInInspector]
     public static int character;
 
+    private Animator sprites;
+
     private float timer;
     private float atkSpd = 0;
     private float atkSpdTimer;
@@ -36,11 +38,17 @@ public class Player : MonoBehaviour
     {
         playerRef = gameObject;
         character = 1;
+
+        //get child object's animator
+        sprites = transform.GetChild(0).gameObject.GetComponent<Animator>();
+        sprites.SetInteger("char",1);
     }
 
     // Update is called once per frame
     void Update()
-    {     
+    {    
+        print(sprites.GetInteger("char"));
+
         //lev stuff
         GameObject secBull;
         GameObject thirdBull;
@@ -95,31 +103,37 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             character = 1;
+            sprites.SetInteger("char",1);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             ResetBubbles();
             character = 2;
+            sprites.SetInteger("char",2);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             ResetBubbles();
             character = 3;
+            sprites.SetInteger("char",3);
         }
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             ResetBubbles();
             character = 4;
+            sprites.SetInteger("char",4);
         }
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
             ResetBubbles();
             character = 5;
+            sprites.SetInteger("char",5);
         }
         if (Input.GetKeyDown(KeyCode.Alpha6))
         {
             ResetBubbles();
             character = 6;
+            sprites.SetInteger("char",6);
         }
 
     }
