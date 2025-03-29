@@ -34,7 +34,7 @@ public class EnemySpawner : MonoBehaviour
 
             //enemy type
             ParentEnemy script = enemy.AddComponent<NormalEnemy>();
-            script.MakeEnemy(5,10);
+            script.MakeEnemy(5,3);
             script.Player = player;
 
             timer = 10;
@@ -86,9 +86,17 @@ namespace EnemyType {
         {
             enemyNav.SetDestination(Player.transform.position);
 
-            //if this then die
-            if (1 == 1){
-                //TakeDamage();
+            if (enemy.hp <= 0){
+                Destroy(gameObject);
+            }
+        }
+
+        void OnCollisionEnter(Collision col) {
+            if (col.gameObject.CompareTag("Bullet")){
+                string incomingBT = col.gameObject.GetComponent<Bullets>().bullType;
+                int incomingBD = col.gameObject.GetComponent<Bullets>().bullDmg;
+
+                TakeDamage(incomingBT, incomingBD);   
             }
         }
         
