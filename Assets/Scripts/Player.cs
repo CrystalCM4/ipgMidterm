@@ -185,8 +185,7 @@ public class Player : MonoBehaviour
             case 6:
                 atkSpd = 1f;
                 timer = 0;
-                GameObject punch;
-                punch = Instantiate(bull6, new Vector3(transform.position.x + 25,
+                Instantiate(bull6, new Vector3(transform.position.x + 25,
                 4, transform.position.z), Quaternion.Euler(0,90,0));
                 break;
         }

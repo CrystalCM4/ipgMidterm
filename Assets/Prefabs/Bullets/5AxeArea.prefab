@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 470144567240894306}
   - component: {fileID: 3710131604986560064}
   - component: {fileID: 8208434926400725961}
-  - component: {fileID: 8690430315967683078}
   m_Layer: 0
   m_Name: axespin
   m_TagString: Untagged
@@ -111,22 +110,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!111 &8690430315967683078
-Animation:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1144455988948173316}
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Animation: {fileID: 7400000, guid: dffa22829972b3f47a3ad064b1d017f4, type: 2}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_UpdateMode: 0
-  m_CullingType: 0
 --- !u!1 &2515842906454791563
 GameObject:
   m_ObjectHideFlags: 0
