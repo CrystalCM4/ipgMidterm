@@ -8,6 +8,9 @@ TagManager:
   - Enemy
   - Bullet
   - Character
+  - Spawner1
+  - Spawner2
+  - Spawner3
   layers:
   - Default
   - TransparentFX

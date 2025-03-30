@@ -1,0 +1,22 @@
+{
+    "wave0":{
+        "stats":[5,3, 5,3, 5,3],
+        "enemies":["Normal", "Normal", "Normal"]
+    },
+    "wave1":{
+        "stats":[15,3, 5,5, 15,3],
+        "enemies":["Fire", "Metal", "Fire"]
+    },
+    "wave2":{
+        "stats":[20,5, 20,5, 20,5],
+        "enemies":["Fire", "Mono", "Metal"]
+    },
+    "wave3":{
+        "stats":[8,7, 8,7, 8,7],
+        "enemies":["Mono", "Mono", "Mono"]
+    },
+    "wave4":{
+        "stats":[2,10, 30,1, 2,10],
+        "enemies":["Metal", "Normal", "Metal"]
+    }
+}

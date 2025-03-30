@@ -33,6 +33,18 @@ public class Player : MonoBehaviour
     private bool secBub = false;
     private bool thirdBub = false;
 
+    //character unique health;
+    public static int levHealth = 4;
+    public static int nicHealth = 3;
+    public static int someHealth = 2;
+    public static int tiHealth = 3;
+    public static int rainHealth = 4;
+    public static int remeHealth = 5;
+
+    private bool hit = false;
+    private float iFrameTime = 1;
+    private Color alpha; 
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -42,18 +54,66 @@ public class Player : MonoBehaviour
         //get child object's animator
         sprites = transform.GetChild(0).gameObject.GetComponent<Animator>();
         sprites.SetInteger("char",1);
+
+        //get child object's sprite's color
+        alpha = transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color;
     }
 
     // Update is called once per frame
     void Update()
-    {    
-        print(sprites.GetInteger("char"));
-
+    {   
         //lev stuff
         GameObject secBull;
         GameObject thirdBull;
         bullTarg = new Vector3(100, transform.position.y, transform.position.z);
         atkSpdTimer += Time.deltaTime;
+
+        //iframes
+        if (hit){
+            alpha.a = 0.5f;
+            transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color = alpha;
+            iFrameTime -= Time.deltaTime;
+            if (iFrameTime <= 0){
+                alpha.a = 1;
+                transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color = alpha;
+                hit = false;
+                iFrameTime = 1;
+            }
+        }
+
+        //character death manager
+        if (character == 1 && levHealth <= 0){
+            character = 2;
+            sprites.SetInteger("char",2);
+        }
+        if (character == 2 && nicHealth <= 0){
+            character = 3;
+            sprites.SetInteger("char",3);
+        }
+        if (character == 3 && someHealth <= 0){
+            character = 4;
+            sprites.SetInteger("char",4);
+        }
+        if (character == 4 && tiHealth <= 0){
+            character = 5;
+            sprites.SetInteger("char",5);
+        }
+        if (character == 5 && rainHealth <= 0){
+            character = 6;
+            sprites.SetInteger("char",6);
+        }
+        if (character == 6 && remeHealth <= 0){
+            character = 1;
+            sprites.SetInteger("char",1);
+        }
+
+        //all dead
+        if (levHealth <= 0 && nicHealth <= 0 && someHealth <= 0
+        && tiHealth <= 0 && rainHealth <= 0 && remeHealth <= 0){
+            print("game over");
+        }
+
+
 
         //right click to move
         if (Input.GetMouseButtonDown(1)){
@@ -100,36 +160,36 @@ public class Player : MonoBehaviour
         
 
         //change characters
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Alpha1) && levHealth > 0)
         {
             character = 1;
             sprites.SetInteger("char",1);
         }
-        if (Input.GetKeyDown(KeyCode.Alpha2))
+        if (Input.GetKeyDown(KeyCode.Alpha2) && nicHealth > 0)
         {
             ResetBubbles();
             character = 2;
             sprites.SetInteger("char",2);
         }
-        if (Input.GetKeyDown(KeyCode.Alpha3))
+        if (Input.GetKeyDown(KeyCode.Alpha3) && someHealth > 0)
         {
             ResetBubbles();
             character = 3;
             sprites.SetInteger("char",3);
         }
-        if (Input.GetKeyDown(KeyCode.Alpha4))
+        if (Input.GetKeyDown(KeyCode.Alpha4) && tiHealth > 0)
         {
             ResetBubbles();
             character = 4;
             sprites.SetInteger("char",4);
         }
-        if (Input.GetKeyDown(KeyCode.Alpha5))
+        if (Input.GetKeyDown(KeyCode.Alpha5) && rainHealth > 0)
         {
             ResetBubbles();
             character = 5;
             sprites.SetInteger("char",5);
         }
-        if (Input.GetKeyDown(KeyCode.Alpha6))
+        if (Input.GetKeyDown(KeyCode.Alpha6) && remeHealth > 0)
         {
             ResetBubbles();
             character = 6;
@@ -209,5 +269,36 @@ public class Player : MonoBehaviour
         shot = false;
         secBub = false;
         thirdBub = false;
+    }
+
+    void OnCollisionEnter(Collision col) {
+        if (col.gameObject.CompareTag("Enemy")){
+
+            hit = true;
+
+            if (character == 1){
+                levHealth -= 1;
+            }
+
+            else if (character == 2){
+                nicHealth -= 1;
+            }
+
+            else if (character == 3){
+                someHealth -= 1;
+            }
+
+            else if (character == 4){
+                tiHealth -= 1;
+            }
+
+            else if (character == 5){
+                rainHealth -= 1;
+            }
+
+            else if (character == 6){
+                remeHealth -= 1;
+            }
+        }
     }
 }
