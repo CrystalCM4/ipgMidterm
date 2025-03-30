@@ -1,6 +1,7 @@
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {   
@@ -42,8 +43,21 @@ public class Player : MonoBehaviour
     public static int remeHealth = 5;
 
     private bool hit = false;
+    private bool inv = false;
     private float iFrameTime = 1;
     private Color alpha; 
+    
+    public AudioSource hitsound;
+
+    private AudioSource enemyHit;
+    private AudioSource enemyCrit;
+    private AudioSource shootBub;
+    private AudioSource shootLas;
+    private AudioSource shootElec;
+    private AudioSource shootBoom;
+    private AudioSource shootAxe;
+    private AudioSource shootPunch;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -57,6 +71,13 @@ public class Player : MonoBehaviour
 
         //get child object's sprite's color
         alpha = transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color;
+
+        shootBub = GameObject.Find("GameManager").GetComponents<AudioSource>()[3];
+        shootLas = GameObject.Find("GameManager").GetComponents<AudioSource>()[4];
+        shootElec = GameObject.Find("GameManager").GetComponents<AudioSource>()[5];
+        shootBoom = GameObject.Find("GameManager").GetComponents<AudioSource>()[6];
+        shootAxe = GameObject.Find("GameManager").GetComponents<AudioSource>()[7];
+        shootPunch = GameObject.Find("GameManager").GetComponents<AudioSource>()[8];
     }
 
     // Update is called once per frame
@@ -70,6 +91,7 @@ public class Player : MonoBehaviour
 
         //iframes
         if (hit){
+            inv = true;
             alpha.a = 0.5f;
             transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color = alpha;
             iFrameTime -= Time.deltaTime;
@@ -77,6 +99,7 @@ public class Player : MonoBehaviour
                 alpha.a = 1;
                 transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().color = alpha;
                 hit = false;
+                inv = false;
                 iFrameTime = 1;
             }
         }
@@ -110,10 +133,18 @@ public class Player : MonoBehaviour
         //all dead
         if (levHealth <= 0 && nicHealth <= 0 && someHealth <= 0
         && tiHealth <= 0 && rainHealth <= 0 && remeHealth <= 0){
-            print("game over");
+            //print("game over");
+            SceneManager.LoadScene("GameOver",LoadSceneMode.Single);
+            transform.position = new Vector3(0,-100,0);
         }
 
-
+        //negative health prevention
+        if (levHealth <= 0) levHealth = 0;
+        if (nicHealth <= 0) nicHealth = 0;
+        if (someHealth <= 0) someHealth = 0;
+        if (tiHealth <= 0) tiHealth = 0;
+        if (rainHealth <= 0) rainHealth = 0;
+        if (remeHealth <= 0) remeHealth = 0;
 
         //right click to move
         if (Input.GetMouseButtonDown(1)){
@@ -145,12 +176,16 @@ public class Player : MonoBehaviour
 
             //lev stuff
             if (timer >= bullFreq && secBub){
+                shootBub.Play();
+                shootBub.time = 0.1f;
                 secBull = Instantiate(bull1,transform.position, Quaternion.identity);
                 secBull.transform.LookAt(bullTarg);
                 secBub = false;
             }
 
             if (timer >= bullFreq * 2 && thirdBub){
+                shootBub.Play();
+                shootBub.time = 0.1f;
                 thirdBull = Instantiate(bull1,transform.position, Quaternion.identity);
                 thirdBull.transform.LookAt(bullTarg);
                 thirdBub = false;
@@ -207,6 +242,9 @@ public class Player : MonoBehaviour
             //lev
             case 1:
 
+                shootBub.Play();
+                shootBub.time = 0.1f;
+
                 atkSpd = 1;
                 timer = 0;
                 GameObject firstBull;
@@ -218,6 +256,9 @@ public class Player : MonoBehaviour
             //nicole
             case 2:
 
+                shootLas.Play();
+                shootLas.time = 0.1f;
+
                 atkSpd = 0.7f;
                 timer = 0;
                 Instantiate(bull2, new Vector3(transform.position.x + 50,
@@ -228,6 +269,9 @@ public class Player : MonoBehaviour
             //some
             case 3:
 
+                shootElec.Play();
+                shootElec.time = 0.1f;
+
                 atkSpd = 3;
                 timer = 0;
                 Instantiate(bull3, new Vector3(0, 0, 0), Quaternion.identity);
@@ -236,6 +280,9 @@ public class Player : MonoBehaviour
 
             //ti
             case 4:
+
+                shootBoom.Play();
+                shootBoom.time = 0.1f;
 
                 atkSpd = 1.2f;
                 timer = 0;
@@ -249,6 +296,8 @@ public class Player : MonoBehaviour
             //rain
             case 5:
 
+                shootAxe.Play();
+
                 atkSpd = 1f;
                 timer = 0;
                 Instantiate(bull5,transform.position, Quaternion.identity);
@@ -257,6 +306,10 @@ public class Player : MonoBehaviour
 
             //reme       
             case 6:
+
+                shootPunch.Play();
+                shootPunch.time = 0.3f;
+
                 atkSpd = 1f;
                 timer = 0;
                 Instantiate(bull6, new Vector3(transform.position.x + 25,
@@ -272,9 +325,12 @@ public class Player : MonoBehaviour
     }
 
     void OnCollisionEnter(Collision col) {
-        if (col.gameObject.CompareTag("Enemy")){
+        if (col.gameObject.CompareTag("Enemy") && !inv){
 
             hit = true;
+
+            hitsound.Play();
+            hitsound.time = 0.3f;
 
             if (character == 1){
                 levHealth -= 1;

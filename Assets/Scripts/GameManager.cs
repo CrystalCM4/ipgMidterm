@@ -23,7 +23,11 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI RemeHp;
 
     public TextMeshProUGUI scoreText;
-    
+
+    void Awake()
+    {
+        //DontDestroyOnLoad(gameObject);
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -79,7 +83,7 @@ public class GameManager : MonoBehaviour
     {
         if (spawnTimer <= 0){
             wave = Random.Range(0,5);
-            spawnTimer = 10;
+            spawnTimer = 5;
         }
     }
 }

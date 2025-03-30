@@ -150,8 +150,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1b2495111eee494eb2a1d473a74b309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flash: {r: 0, g: 0, b: 0, a: 0}
+  subGO: {fileID: 0}
   bullType: 
   bullDmg: 0
+  enemyHit: {fileID: 0}
+  enemyCrit: {fileID: 0}
 --- !u!1 &3800430074002671015
 GameObject:
   m_ObjectHideFlags: 0

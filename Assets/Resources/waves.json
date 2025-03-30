@@ -8,7 +8,7 @@
         "enemies":["Fire", "Metal", "Fire"]
     },
     "wave2":{
-        "stats":[20,5, 20,5, 20,5],
+        "stats":[10,5, 10,5, 10,5],
         "enemies":["Fire", "Mono", "Metal"]
     },
     "wave3":{

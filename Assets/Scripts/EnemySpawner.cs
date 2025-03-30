@@ -49,7 +49,7 @@ public class EnemySpawner : MonoBehaviour
 
         if (GameManager.spawnTimer <= 0){
             
-            print("spawn enemies");
+            //print("spawn enemies");
 
             //spawn enemy
             GameObject enemy = Instantiate(genericPrefab, 
@@ -208,11 +208,13 @@ namespace EnemyType {
     //parent enemy - enemies inherit from this
     public class ParentEnemy : MonoBehaviour{
         public EnemyStats enemy;
-
-        [SerializeField]
         private NavMeshAgent enemyNav;
-        
         private TextMeshProUGUI hpText;
+        private AudioSource death;
+
+        //weaknesses and resistances
+        public List<string> weakness = new();
+        public List<string> resist = new();
 
         private int scoreHolder;
 
@@ -236,6 +238,8 @@ namespace EnemyType {
             hpText = transform.GetChild(1).gameObject
             .transform.GetChild(0).GetComponent<TextMeshProUGUI>();
 
+            death = GameObject.Find("GameManager").GetComponents<AudioSource>()[9];
+
             scoreHolder = enemy.hp;
         }
         
@@ -246,6 +250,8 @@ namespace EnemyType {
 
             if (enemy.hp <= 0){
                 Destroy(gameObject);
+                death.Play();
+                //death.time = 0.1f;
                 GameManager.score += scoreHolder;
             }
         }
@@ -263,9 +269,6 @@ namespace EnemyType {
 
     //normal enemy - weak to strike damage / ignores ghost damage
     public class NormalEnemy : ParentEnemy{
-        
-        //weakness list
-        public List<string> weakness = new();
 
         public override void MakeEnemy(int h, int s){
             base.MakeEnemy(h, s);
@@ -298,10 +301,6 @@ namespace EnemyType {
 
     //fire enemy - weak to water damage / resists metal damage
     public class FireEnemy : ParentEnemy{
-
-        //weakness list
-        public List<string> weakness = new();
-        public List<string> resist = new();
 
         public override void MakeEnemy(int h, int s){
             base.MakeEnemy(h, s);
@@ -340,9 +339,6 @@ namespace EnemyType {
     //mono enemy - weak to pastel and strike damage
     public class MonoEnemy : ParentEnemy{
 
-        //weakness list
-        public List<string> weakness = new();
-
         public override void MakeEnemy(int h, int s){
             base.MakeEnemy(h, s);
             weakness.Add("Pastel");
@@ -369,9 +365,6 @@ namespace EnemyType {
 
     //metal enemy - weak to electric and strike damage
     public class MetalEnemy : ParentEnemy{
-
-        //weakness list
-        public List<string> weakness = new();
 
         public override void MakeEnemy(int h, int s){
             base.MakeEnemy(h, s);

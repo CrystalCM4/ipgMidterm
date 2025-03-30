@@ -1,4 +1,6 @@
+using EnemyType;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Bullets : MonoBehaviour
 {   
@@ -8,9 +10,14 @@ public class Bullets : MonoBehaviour
 
     private GameObject FollowPlayer{ get; set; }
 
+    [HideInInspector]
+    public Color flash;
+    private GameObject ElectricFlash;
+    private float flashTime = 0;
+
+
     [SerializeField]
     private GameObject subGO;
-
 
     [HideInInspector]
     public string bullType;
@@ -18,11 +25,17 @@ public class Bullets : MonoBehaviour
     [HideInInspector]
     public int bullDmg;
 
+    private AudioSource enemyHit;
+    private AudioSource enemyCrit;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         FollowPlayer = Player.playerRef;
         subGO = transform.GetChild(0).gameObject;
+
+        enemyHit = GameObject.Find("GameManager").GetComponents<AudioSource>()[1];
+        enemyCrit = GameObject.Find("GameManager").GetComponents<AudioSource>()[2];
     }
 
     // Update is called once per frame
@@ -74,7 +87,15 @@ public class Bullets : MonoBehaviour
 
                 bullType = "Electric";
                 bullDmg = 1;
-                if (timer >= 0.1){
+
+                //fade out
+                ElectricFlash = transform.GetChild(1).gameObject.transform.GetChild(0).gameObject;
+                flashTime += 5 * Time.deltaTime;
+                flash = Color.white;
+                flash.a = 1 - flashTime;
+                ElectricFlash.GetComponent<Image>().color = flash;
+
+                if (timer >= 0.5){
                     Destroy(gameObject);
                 }
 
@@ -131,8 +152,7 @@ public class Bullets : MonoBehaviour
     }
 
     void OnCollisionEnter(Collision col) {
-        if ((col.gameObject.CompareTag("Wall") || col.gameObject.CompareTag("Enemy"))
-        && Player.character == 1){
+        if (col.gameObject.CompareTag("Wall") && Player.character == 1){
             Destroy(gameObject);
         }
 
@@ -144,6 +164,22 @@ public class Bullets : MonoBehaviour
         if (col.gameObject.CompareTag("Wall") && Player.character == 4){
             if (timer >= 0.6) Destroy(gameObject);
             else timer = 0.6f;
+        }
+
+        if (col.gameObject.CompareTag("Enemy")){
+            
+            if (Player.character == 1) Destroy(gameObject);
+
+            for (int i = 0; i < col.gameObject.GetComponent<ParentEnemy>().weakness.Count; i ++){
+                if (col.gameObject.GetComponent<ParentEnemy>().weakness[i].Equals(bullType)){
+                    enemyCrit.Play();
+                }
+                else enemyHit.Play();
+            }
+
+            if (enemyHit.time >= 100 || enemyCrit.time >= 100){
+                Destroy(gameObject);
+            }
         }
     }
 }
