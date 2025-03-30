@@ -45,8 +45,11 @@ public class EnemySpawner : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {   
+
         if (GameManager.spawnTimer <= 0){
+            
+            print("spawn enemies");
 
             //spawn enemy
             GameObject enemy = Instantiate(genericPrefab, 

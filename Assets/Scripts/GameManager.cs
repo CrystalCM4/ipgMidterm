@@ -32,10 +32,15 @@ public class GameManager : MonoBehaviour
         spawnTimer = 5;
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         spawnTimer -= Time.deltaTime;
+    }
+
+    // Update is called once per frame
+    void Update()
+    {   
+        //print(spawnTimer);
 
         //dead icons
         Color death = Color.red;
