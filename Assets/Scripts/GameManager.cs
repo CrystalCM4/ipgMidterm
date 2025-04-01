@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         wave = 0;
+        score = 0;
         spawnTimer = 5;
 
         //recolor icons
