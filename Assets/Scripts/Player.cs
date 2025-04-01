@@ -64,6 +64,15 @@ public class Player : MonoBehaviour
     {
         playerRef = gameObject;
         character = 1;
+        transform.position = new Vector3(-25,2.5f,0);
+
+        levHealth = 4;
+        nicHealth = 3;
+        someHealth = 2;
+        tiHealth = 3;
+        rainHealth = 4;
+        remeHealth = 5;
+
 
         //get child object's animator
         sprites = transform.GetChild(0).gameObject.GetComponent<Animator>();
@@ -230,7 +239,7 @@ public class Player : MonoBehaviour
             character = 6;
             sprites.SetInteger("char",6);
         }
-
+            
     }
 
     public void ShootBullets(){

@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
@@ -27,6 +28,7 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         //DontDestroyOnLoad(gameObject);
+        //Instance = this;
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -34,6 +36,14 @@ public class GameManager : MonoBehaviour
     {
         wave = 0;
         spawnTimer = 5;
+
+        //recolor icons
+        levIcon.GetComponent<Image>().color = Color.white;
+        nicIcon.GetComponent<Image>().color = Color.white;
+        someIcon.GetComponent<Image>().color = Color.white;
+        tiIcon.GetComponent<Image>().color = Color.white;
+        rainIcon.GetComponent<Image>().color = Color.white;
+        remeIcon.GetComponent<Image>().color = Color.white;
     }
 
     void FixedUpdate()
@@ -76,7 +86,7 @@ public class GameManager : MonoBehaviour
         RemeHp.text = Player.remeHealth.ToString() + " HP";
 
         scoreText.text = "Score: " + score.ToString();
-
+        
     }
 
     void LateUpdate()
