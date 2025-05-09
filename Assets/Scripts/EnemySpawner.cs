@@ -227,11 +227,14 @@ namespace EnemyType {
         }
 
         public virtual void TakeDamage(string bullType, int bullDmg){
-            enemy.hp -= bullDmg;
+
+            //take damage after calculation
+            enemy.hp -= (int)((bullDmg + GameManager.damageAdd) * GameManager.damageMult);
         }
 
         void Start()
         {
+            enemy.hp = (int)(enemy.hp * GameManager.enemyHealthMult);
             enemyNav = GetComponent<NavMeshAgent>();
             enemyNav.speed = enemy.spd;
 

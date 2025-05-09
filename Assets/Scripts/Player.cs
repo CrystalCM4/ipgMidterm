@@ -167,7 +167,7 @@ public class Player : MonoBehaviour
         }
 
         //left click to shoot bullets
-        if (Input.GetMouseButtonDown(0) && atkSpdTimer >= atkSpd){
+        if (Input.GetMouseButtonDown(0) && atkSpdTimer >= atkSpd && !GameManager.upgradePause){
             if (character == 1) {
                 shot = true;
                 secBub = true;
