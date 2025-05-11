@@ -1,19 +1,11 @@
-using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EndManager : MonoBehaviour
 {
-    public TextMeshProUGUI endscore;
+    public void RestartButton(){
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //endscore.text = "Score: " + GameManager.score;
+        //load scene
+        SceneManager.LoadScene("TitleScreen",LoadSceneMode.Single);
     }
 }

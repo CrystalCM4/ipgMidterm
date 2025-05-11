@@ -93,6 +93,9 @@ public class Bullets : MonoBehaviour
             //some
             case 3:
 
+                transform.position = new Vector3(FollowPlayer.transform.position.x,
+                FollowPlayer.transform.position.y, FollowPlayer.transform.position.z);
+
                 bullType = "Electric";
                 bullDmg = 1;
 
