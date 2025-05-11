@@ -76,8 +76,10 @@ public class GameManager : MonoBehaviour
 
     public static float upgradeTimer;
     public static float shortTimer;
-    public static float upgradeTimerBase = 2;
+    public static float upgradeTimerBase = 20;
     public static bool upgradePause = false;
+
+    public AudioSource upgradeScreenSound;
 
 
     void Awake()
@@ -199,8 +201,9 @@ public class GameManager : MonoBehaviour
         if (upgradeTimer <= 0 && !upgradePause){
             
             //make enemies stronger
-            enemyHealthMult += score / 800;
+            enemyHealthMult += score / 300;
 
+            upgradeScreenSound.Play();
             int randomSelect;
 
             //choose three random things from the list. there can be overlaps            
@@ -215,7 +218,7 @@ public class GameManager : MonoBehaviour
                 //choose random special option
                 else {
 
-                    print("special chosen");
+                    //print("special chosen");
 
                     //if every special upgrade is chosen, pick a normal upgrade
                     int chosenCount = 0;

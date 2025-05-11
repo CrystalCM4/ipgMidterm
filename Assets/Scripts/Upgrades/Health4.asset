@@ -15,7 +15,7 @@ MonoBehaviour:
   upgradeName: Was that worth it?
   damageAdd: 0
   damageMult: 0.3
-  healthAdd: 1
+  healthAdd: 2
   specificCondition: common
-  description: Health +1, Damage x0.3
+  description: Health +2, Damage x0.3
   chosen: 0

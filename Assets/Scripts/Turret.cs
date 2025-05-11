@@ -6,6 +6,7 @@ public class Turret : MonoBehaviour
     private float shootTimer;
     public GameObject turretBullet;
     private GameObject FollowPlayer{ get; set; }
+    public AudioSource shootSound;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -21,19 +22,24 @@ public class Turret : MonoBehaviour
         transform.position = new Vector3(FollowPlayer.transform.position.x + 3,
         FollowPlayer.transform.position.y + 2, FollowPlayer.transform.position.z);
 
-        //spawn when you get the turret upgrade
-        if (Player.tiHealth > 0){
-            gameObject.SetActive(true);
+        //turret disappears when ti is dead
+        if (Player.tiHealth <= 0){
+            gameObject.GetComponent<Renderer>().enabled = false;
         }
-        else gameObject.SetActive(false);
+        else {
+            
+            gameObject.GetComponent<Renderer>().enabled = true;
 
-        shootTimer -= Time.deltaTime;
-        if (shootTimer <= 0){
+            //turret behavior
+            shootTimer -= Time.deltaTime;
+            if (shootTimer <= 0){
 
-            //shoot bullet
-            Instantiate(turretBullet, new Vector3(transform.position.x + 2.5f,
-            transform.position.y, transform.position.z), quaternion.identity);
-            shootTimer = 2;
+                //shoot bullet
+                shootSound.Play();
+                Instantiate(turretBullet, new Vector3(transform.position.x + 2.5f,
+                transform.position.y, transform.position.z), quaternion.identity);
+                shootTimer = 2;
+            }
         }
     }
 }

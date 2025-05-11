@@ -234,9 +234,18 @@ namespace EnemyType {
         public virtual void TakeDamage(string bullType, int bullDmg){
 
             //take damage after calculation
+            int finalDamage;
             int flatDamageCalc = (int)(bullDmg + GameManager.damageAdd);
             if (flatDamageCalc < 0) flatDamageCalc = 0; //prevent healing enemies
-            enemy.hp -= (int)(flatDamageCalc * GameManager.damageMult);
+
+            if ((int)(flatDamageCalc * GameManager.damageMult) == 0){
+                finalDamage = 1; //players cant do 0 damage
+            }
+            else {
+                finalDamage = (int)(flatDamageCalc * GameManager.damageMult);
+            }
+            //print((int)(flatDamageCalc * GameManager.damageMult));
+            enemy.hp -= finalDamage;
         }
 
         void Start()
