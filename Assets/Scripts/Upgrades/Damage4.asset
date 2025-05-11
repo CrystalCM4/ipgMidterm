@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeName: Do the Math
   damageAdd: -10
-  damageMult: 3
+  damageMult: 5
   healthAdd: 0
   specificCondition: 
-  description: Damage - 10, Damage x 3
+  description: Damage -10, Damage x5
+  chosen: 0

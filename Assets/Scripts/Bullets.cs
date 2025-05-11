@@ -7,6 +7,7 @@ public class Bullets : MonoBehaviour
     private int projectileSpeed = 50;
     private float timer = 0;
     private float rotate = 0;
+    private Vector3 basePos;
 
     private GameObject FollowPlayer{ get; set; }
 
@@ -28,14 +29,21 @@ public class Bullets : MonoBehaviour
     private AudioSource enemyHit;
     private AudioSource enemyCrit;
 
+    //upgrade stuff
+    private Vector3 basePunchScale;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        basePos = transform.position;
+
         FollowPlayer = Player.playerRef;
         subGO = transform.GetChild(0).gameObject;
 
         enemyHit = GameObject.Find("GameManager").GetComponents<AudioSource>()[1];
         enemyCrit = GameObject.Find("GameManager").GetComponents<AudioSource>()[2];
+
+        basePunchScale = transform.localScale;
     }
 
     // Update is called once per frame
@@ -95,7 +103,7 @@ public class Bullets : MonoBehaviour
                 flash.a = 1 - flashTime;
                 ElectricFlash.GetComponent<Image>().color = flash;
 
-                if (timer >= 0.5){
+                if (timer >= 0.1){
                     Destroy(gameObject);
                 }
 
@@ -130,7 +138,7 @@ public class Bullets : MonoBehaviour
                 FollowPlayer.transform.position.y, FollowPlayer.transform.position.z);
 
                 bullType = "Ghost";
-                bullDmg = 20;
+                bullDmg = 20 * GameManager.catchTheRatDamageMult;
                 if (timer >= 0.5){
                     Destroy(gameObject);
                 }
@@ -140,8 +148,18 @@ public class Bullets : MonoBehaviour
             //reme       
             case 6:
 
+                if (GameManager.megaPunch){
+                    transform.position = new Vector3(basePos.x,
+                    basePos.y + 5, basePos.z);
+                }
+
+                transform.localScale = new Vector3(
+                    basePunchScale.x * GameManager.megaPunchSizeMult, 
+                    basePunchScale.y * GameManager.megaPunchSizeMult, 
+                    basePunchScale.z * GameManager.megaPunchSizeMult);
+
                 bullType = "Strike";
-                bullDmg = 5;
+                bullDmg = 10 * GameManager.megaPunchDamageMult;
                 if (timer >= 0.5){
                     Destroy(gameObject);
                 }
@@ -149,6 +167,13 @@ public class Bullets : MonoBehaviour
                 break;
         }
         
+    }
+
+    void LateUpdate()
+    {
+        if (Player.character == 3){
+           
+        }
     }
 
     void OnCollisionEnter(Collision col) {

@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 822387d4f3472ca4f89d5058d24b7625, type: 3}
-  m_Name: Special3
+  m_Name: Damage6
   m_EditorClassIdentifier: 
-  upgradeName: '"Global Passive"'
+  upgradeName: Big Sacrifice
   damageAdd: 0
-  damageMult: 1
-  healthAdd: 0
-  specificCondition: globalpassive
-  description: Revive everyone with random health (1~5).
+  damageMult: 3
+  healthAdd: -5
+  specificCondition: 
+  description: Damage x3, Health -5
   chosen: 0

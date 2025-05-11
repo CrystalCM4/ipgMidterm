@@ -17,5 +17,5 @@ MonoBehaviour:
   damageMult: 1
   healthAdd: 0
   specificCondition: megapunch
-  description: Reme's attack becomes 6 times larger.
+  description: Reme's attack becomes 3 times larger and x6 damage.
   chosen: 1

@@ -796,11 +796,17 @@ MonoBehaviour:
   damage2: {fileID: 11400000, guid: 268eb356f6aeeb74f8ecdfcd9ba12d3c, type: 2}
   damage3: {fileID: 11400000, guid: 252309ee6fe133c439596cf6e629cf3b, type: 2}
   damage4: {fileID: 11400000, guid: f66740597e16b6f418a9d18ceb4a860f, type: 2}
+  damage5: {fileID: 11400000, guid: 6d8d98b9eff697047bc22a10f75a46b8, type: 2}
+  damage6: {fileID: 11400000, guid: 3e5a33f58b03bb348965c063801e7f41, type: 2}
   health1: {fileID: 11400000, guid: b7df4911e339ee8498ae511a3b4c99bf, type: 2}
   health2: {fileID: 11400000, guid: ded84f865dfbfa347a88f4e516dfa119, type: 2}
   special1: {fileID: 11400000, guid: 4c54c086baac2e34189f4b5ac6bd584a, type: 2}
   special2: {fileID: 11400000, guid: 38e73c7da887f444cb908790a76d6cb9, type: 2}
   special3: {fileID: 11400000, guid: fc51be1b22380fb42869720b96ba6e2b, type: 2}
+  special4: {fileID: 11400000, guid: 76dff86863233674fbeae945d6a7b096, type: 2}
+  special5: {fileID: 11400000, guid: 31fe08e699c731248812296ffb47db40, type: 2}
+  special6: {fileID: 11400000, guid: ce9935b6450b25942bd98b66946aec09, type: 2}
+  special7: {fileID: 11400000, guid: c886ae198daab4744a18cf6ccdbf41c9, type: 2}
   upgradeScreen: {fileID: 1533645089}
 --- !u!4 &153288867
 Transform:
@@ -3484,8 +3490,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: d94078bf1892f2d4992bf48331b63a05, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -4701,8 +4707,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: d94078bf1892f2d4992bf48331b63a05, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -5818,8 +5824,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: d94078bf1892f2d4992bf48331b63a05, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -6056,8 +6062,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -6094,7 +6100,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: -1.0053024, w: 0}
+  m_margin: {x: 0, y: 0, z: -123.769264, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0

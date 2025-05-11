@@ -16,6 +16,6 @@ MonoBehaviour:
   damageAdd: 0
   damageMult: 1
   healthAdd: 0
-  specificCondition: tisturret
+  specificCondition: turretspecial
   description: Ti's turret will help you fight. (Ti should be alive)
-  chosen: 1
+  chosen: 0

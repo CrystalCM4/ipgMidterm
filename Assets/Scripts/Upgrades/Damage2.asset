@@ -17,5 +17,5 @@ MonoBehaviour:
   damageMult: 1
   healthAdd: 0
   specificCondition: 
-  description: Damage + 5
+  description: Damage +5
   chosen: 0

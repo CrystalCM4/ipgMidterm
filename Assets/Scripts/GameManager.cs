@@ -37,6 +37,8 @@ public class GameManager : MonoBehaviour
     public Upgrades damage2;
     public Upgrades damage3;
     public Upgrades damage4;
+    public Upgrades damage5;
+    public Upgrades damage6;
 
     public Upgrades health1;
     public Upgrades health2;
@@ -44,13 +46,32 @@ public class GameManager : MonoBehaviour
     public Upgrades special1;
     public Upgrades special2;
     public Upgrades special3;
+    public Upgrades special4;
+    public Upgrades special5;
+    public Upgrades special6;
+    public Upgrades special7;
 
     public GameObject upgradeScreen;
     private List<Upgrades> upgradeList = new();
-    private List<Upgrades> specialList = new();
+    public static List<Upgrades> specialList = new();
     public static Upgrades[] options = new Upgrades[3];
 
+    public static bool turretSpecial;
+    public static bool megaPunch;
+    public static bool globalPassive;
+    public static bool mcSyndrome;
+    public static bool catchTheRat;
+    public static bool tasteTheRainbow;
+    public static bool bubbleHunter;
+
+    public static int megaPunchSizeMult;
+    public static int megaPunchDamageMult;
+    public static int catchTheRatSpeedMult;
+    public static int catchTheRatDamageMult;
+    public static int tasteTheRainbowMult;
+
     public static float upgradeTimer;
+    public static float upgradeTimerBase = 20;
     public static bool upgradePause = false;
 
 
@@ -65,8 +86,8 @@ public class GameManager : MonoBehaviour
     {
         wave = 0;
         score = 0;
-        spawnTimer = 5;
-        upgradeTimer = 20;
+        spawnTimer = 4;
+        upgradeTimer = upgradeTimerBase;
 
         //recolor icons
         levIcon.GetComponent<Image>().color = Color.white;
@@ -79,13 +100,33 @@ public class GameManager : MonoBehaviour
 
         //put upgrades in list
         upgradeList = new List<Upgrades>{
-            damage1, damage2, damage3, damage4,
-            health1, 
+            damage1, damage2, damage3, damage4, damage5, damage6,
+            health1, health2
         };
 
         specialList = new List<Upgrades>{
-            special1, special2, special3
+            special1, special2, special3, special4, special5, special6, special7
         };
+
+        for (int i = 0; i < specialList.Count; i ++){
+            specialList[i].chosen = false;
+        }
+
+        //reset upgrade booleans
+        turretSpecial = false;
+        megaPunch = false;
+        globalPassive = false;
+        mcSyndrome = false;
+        catchTheRat = false;
+        tasteTheRainbow = false;
+        bubbleHunter = false;
+
+        megaPunchSizeMult = 1;
+        megaPunchDamageMult = 1;
+        catchTheRatDamageMult = 1;
+        catchTheRatSpeedMult = 1;
+        tasteTheRainbowMult = 1;
+
     }
 
     void FixedUpdate()
@@ -146,14 +187,14 @@ public class GameManager : MonoBehaviour
         if (upgradeTimer <= 0 && !upgradePause){
             
             //make enemies stronger
-            enemyHealthMult *= 1.5f;
+            enemyHealthMult += score / 1000;
 
             int randomSelect;
 
             //choose three random things from the list. there can be overlaps            
             for (int i = 0; i < options.Length; i ++){
 
-                randomSelect = Random.Range(0,upgradeList.Count + 1); //+2 is for special
+                randomSelect = Random.Range(0, upgradeList.Count + 1); //+1 is for special
 
                 if (randomSelect != upgradeList.Count){
                     options[i] = upgradeList[randomSelect];
@@ -161,6 +202,8 @@ public class GameManager : MonoBehaviour
                 }
                 //choose random special option
                 else {
+
+                    print("special chosen");
 
                     //if every special upgrade is chosen, pick a normal upgrade
                     int chosenCount = 0;
@@ -183,7 +226,6 @@ public class GameManager : MonoBehaviour
                             if (!specialList[randomSpecial].chosen){
                                 //choose
                                 options[i] = specialList[randomSpecial];
-                                specialList[randomSpecial].chosen = true;
                                 valid = true;
                             }
                             else {
@@ -208,7 +250,86 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 1;
             upgradeScreen.SetActive(false);
         }
+
+        //upgrade check
+        if (megaPunch){
+            megaPunchSizeMult = 3;
+            megaPunchDamageMult = 6;
+        }
+
+        if (globalPassive){
+
+            int reviveHealth = Random.Range(1,6); //1~5
+            if (Player.levHealth <= 0) Player.levHealth = reviveHealth;
+            if (Player.nicHealth <= 0) Player.nicHealth = reviveHealth;
+            if (Player.someHealth <= 0) Player.someHealth = reviveHealth;
+            if (Player.tiHealth <= 0) Player.tiHealth = reviveHealth;
+            if (Player.rainHealth <= 0) Player.rainHealth = reviveHealth;
+            if (Player.remeHealth <= 0) Player.remeHealth = reviveHealth;
+            globalPassive = false;
+        }
+
+        if (mcSyndrome){
+            int newHealth = Player.levHealth + Player.nicHealth + Player.someHealth + Player.tiHealth + Player.rainHealth + Player.remeHealth;
+            if (Player.character == 1){
+                Player.levHealth = newHealth;
+                Player.nicHealth = 0;
+                Player.someHealth = 0;
+                Player.tiHealth = 0;
+                Player.rainHealth = 0;
+                Player.remeHealth = 0;
+            }
+            else if (Player.character == 2){
+                Player.levHealth = 0;
+                Player.nicHealth = newHealth;
+                Player.someHealth = 0;
+                Player.tiHealth = 0;
+                Player.rainHealth = 0;
+                Player.remeHealth = 0;
+            }
+            else if (Player.character == 3){
+                Player.levHealth = 0;
+                Player.nicHealth = 0;
+                Player.someHealth = newHealth;
+                Player.tiHealth = 0;
+                Player.rainHealth = 0;
+                Player.remeHealth = 0;
+            }
+            else if (Player.character == 4){
+                Player.levHealth = 0;
+                Player.nicHealth = 0;
+                Player.someHealth = 0;
+                Player.tiHealth = newHealth;
+                Player.rainHealth = 0;
+                Player.remeHealth = 0;
+            }
+            else if (Player.character == 5){
+                Player.levHealth = 0;
+                Player.nicHealth = 0;
+                Player.someHealth = 0;
+                Player.tiHealth = 0;
+                Player.rainHealth = newHealth;
+                Player.remeHealth = 0;
+            }
+            else if (Player.character == 6){
+                Player.levHealth = 0;
+                Player.nicHealth = 0;
+                Player.someHealth = 0;
+                Player.tiHealth = 0;
+                Player.rainHealth = 0;
+                Player.remeHealth = newHealth;
+            }
+            mcSyndrome = false;
+        }
         
+        if (catchTheRat){
+            catchTheRatDamageMult = 2;
+            catchTheRatSpeedMult = 2;
+        }
+
+        if (tasteTheRainbow){
+            tasteTheRainbowMult = 0;
+        }
     }
 
     void LateUpdate()
@@ -216,11 +337,7 @@ public class GameManager : MonoBehaviour
         //spawn random wave
         if (spawnTimer <= 0){
             wave = Random.Range(0,5);
-            spawnTimer = 5;
+            spawnTimer = 4;
         }
-
-        
-
-        
     }
 }

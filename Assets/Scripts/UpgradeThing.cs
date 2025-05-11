@@ -10,11 +10,6 @@ public class UpgradeThing : MonoBehaviour
     public TextMeshProUGUI descText;
     public Button selectButton;
 
-    void Awake()
-    {
-
-    }
-
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -33,7 +28,7 @@ public class UpgradeThing : MonoBehaviour
     public void SelectUpgrade(){
 
         GameManager.damageAdd += GameManager.options[upgradeNumber].damageAdd;
-        GameManager.damageMult += GameManager.options[upgradeNumber].damageMult;
+        GameManager.damageMult *= GameManager.options[upgradeNumber].damageMult;
 
         Player.levHealth += GameManager.options[upgradeNumber].healthAdd;
         Player.nicHealth += GameManager.options[upgradeNumber].healthAdd;
@@ -42,8 +37,38 @@ public class UpgradeThing : MonoBehaviour
         Player.rainHealth += GameManager.options[upgradeNumber].healthAdd;
         Player.remeHealth += GameManager.options[upgradeNumber].healthAdd;
 
-        GameManager.upgradeTimer = 20;
+        GameManager.upgradeTimer = GameManager.upgradeTimerBase;
         GameManager.upgradePause = false;
+
+        //special upgrades
+        if (GameManager.options[upgradeNumber].specificCondition.Equals("turretspecial")){
+            GameManager.turretSpecial = true;
+            GameManager.specialList[0].chosen = true;
+        }
+        else if (GameManager.options[upgradeNumber].specificCondition.Equals("megapunch")){
+            GameManager.megaPunch = true;
+            GameManager.specialList[1].chosen = true;
+        }
+        else if (GameManager.options[upgradeNumber].specificCondition.Equals("globalpassive")){
+            GameManager.globalPassive = true;
+            GameManager.specialList[2].chosen = true;
+        }
+        else if (GameManager.options[upgradeNumber].specificCondition.Equals("mcsyndrome")){
+            GameManager.mcSyndrome = true;
+            GameManager.specialList[3].chosen = true;
+        }
+        else if (GameManager.options[upgradeNumber].specificCondition.Equals("catchtherat")){
+            GameManager.catchTheRat = true;
+            GameManager.specialList[4].chosen = true;
+        }
+        else if (GameManager.options[upgradeNumber].specificCondition.Equals("tastetherainbow")){
+            GameManager.tasteTheRainbow = true;
+            GameManager.specialList[5].chosen = true;
+        }
+        else if (GameManager.options[upgradeNumber].specificCondition.Equals("bubblehunter")){
+            GameManager.bubbleHunter = true;
+            GameManager.specialList[6].chosen = true;
+        }
 
     }
 }

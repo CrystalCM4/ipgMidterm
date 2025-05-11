@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 822387d4f3472ca4f89d5058d24b7625, type: 3}
-  m_Name: Special3
+  m_Name: Special6
   m_EditorClassIdentifier: 
-  upgradeName: '"Global Passive"'
+  upgradeName: Taste the Rainbow
   damageAdd: 0
   damageMult: 1
   healthAdd: 0
-  specificCondition: globalpassive
-  description: Revive everyone with random health (1~5).
-  chosen: 0
+  specificCondition: tastetherainbow
+  description: Nicole's attack speed becomes infinite.
+  chosen: 1

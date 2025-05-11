@@ -15,7 +15,7 @@ MonoBehaviour:
   upgradeName: Heal up!
   damageAdd: 0
   damageMult: 1
-  healthAdd: 3
+  healthAdd: 2
   specificCondition: 
-  description: Health + 3
+  description: Health +2
   chosen: 0

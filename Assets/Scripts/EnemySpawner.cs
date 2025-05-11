@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using EnemyType;
 using TMPro;
@@ -217,6 +218,10 @@ namespace EnemyType {
         public List<string> resist = new();
 
         private int scoreHolder;
+        private bool stunned;
+        private float stunTimer = 0;
+        private GameObject bubbled;
+        private float baseSpeed;
 
         //getter setter for player gameobject
         public GameObject Player{ get; set; }
@@ -229,7 +234,9 @@ namespace EnemyType {
         public virtual void TakeDamage(string bullType, int bullDmg){
 
             //take damage after calculation
-            enemy.hp -= (int)((bullDmg + GameManager.damageAdd) * GameManager.damageMult);
+            int flatDamageCalc = (int)(bullDmg + GameManager.damageAdd);
+            if (flatDamageCalc < 0) flatDamageCalc = 0; //prevent healing enemies
+            enemy.hp -= (int)(flatDamageCalc * GameManager.damageMult);
         }
 
         void Start()
@@ -244,6 +251,10 @@ namespace EnemyType {
             death = GameObject.Find("GameManager").GetComponents<AudioSource>()[9];
 
             scoreHolder = enemy.hp;
+
+            bubbled = transform.GetChild(2).gameObject;
+            bubbled.SetActive(false);
+            baseSpeed = enemy.spd;
         }
         
         void Update()
@@ -257,12 +268,29 @@ namespace EnemyType {
                 //death.time = 0.1f;
                 GameManager.score += scoreHolder;
             }
+
+            //stun
+            if (stunned){
+                enemyNav.speed = 0;
+                bubbled.SetActive(true);
+                stunTimer += Time.deltaTime;
+                if (stunTimer >= 5){
+                    stunTimer = 0;
+                    enemyNav.speed = baseSpeed;
+                    bubbled.SetActive(false);
+                    stunned = false;
+                }
+            }
         }
 
         void OnCollisionEnter(Collision col) {
             if (col.gameObject.CompareTag("Bullet")){
                 string incomingBT = col.gameObject.GetComponent<Bullets>().bullType;
                 int incomingBD = col.gameObject.GetComponent<Bullets>().bullDmg;
+
+                if (GameManager.bubbleHunter && col.gameObject.GetComponent<Bullets>().bullType.Equals("Water")){
+                    stunned = true;
+                }
 
                 TakeDamage(incomingBT, incomingBD);   
             }

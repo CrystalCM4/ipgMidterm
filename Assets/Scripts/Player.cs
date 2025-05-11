@@ -58,6 +58,8 @@ public class Player : MonoBehaviour
     private AudioSource shootAxe;
     private AudioSource shootPunch;
 
+    private float baseSpeed;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -87,6 +89,8 @@ public class Player : MonoBehaviour
         shootBoom = GameObject.Find("GameManager").GetComponents<AudioSource>()[6];
         shootAxe = GameObject.Find("GameManager").GetComponents<AudioSource>()[7];
         shootPunch = GameObject.Find("GameManager").GetComponents<AudioSource>()[8];
+
+        baseSpeed = player.speed;
     }
 
     // Update is called once per frame
@@ -207,36 +211,42 @@ public class Player : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Alpha1) && levHealth > 0)
         {
             character = 1;
+            player.speed = baseSpeed;
             sprites.SetInteger("char",1);
         }
         if (Input.GetKeyDown(KeyCode.Alpha2) && nicHealth > 0)
         {
             ResetBubbles();
             character = 2;
+            player.speed = baseSpeed;
             sprites.SetInteger("char",2);
         }
         if (Input.GetKeyDown(KeyCode.Alpha3) && someHealth > 0)
         {
             ResetBubbles();
             character = 3;
+            player.speed = baseSpeed;
             sprites.SetInteger("char",3);
         }
         if (Input.GetKeyDown(KeyCode.Alpha4) && tiHealth > 0)
         {
             ResetBubbles();
             character = 4;
+            player.speed = baseSpeed;
             sprites.SetInteger("char",4);
         }
         if (Input.GetKeyDown(KeyCode.Alpha5) && rainHealth > 0)
         {
             ResetBubbles();
             character = 5;
+            player.speed = baseSpeed * GameManager.catchTheRatSpeedMult;
             sprites.SetInteger("char",5);
         }
         if (Input.GetKeyDown(KeyCode.Alpha6) && remeHealth > 0)
         {
             ResetBubbles();
             character = 6;
+            player.speed = baseSpeed;
             sprites.SetInteger("char",6);
         }
             
@@ -268,7 +278,7 @@ public class Player : MonoBehaviour
                 shootLas.Play();
                 shootLas.time = 0.1f;
 
-                atkSpd = 0.7f;
+                atkSpd = 0.7f * GameManager.tasteTheRainbowMult;
                 timer = 0;
                 Instantiate(bull2, new Vector3(transform.position.x + 50,
                 transform.position.y, transform.position.z), Quaternion.Euler(90f, 90f, 0f));
