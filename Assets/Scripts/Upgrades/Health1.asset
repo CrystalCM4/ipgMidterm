@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 822387d4f3472ca4f89d5058d24b7625, type: 3}
   m_Name: Health1
   m_EditorClassIdentifier: 
-  upgradeName: Heal up!
+  upgradeName: Medkit
   damageAdd: 0
   damageMult: 1
   healthAdd: 2
-  specificCondition: 
+  specificCondition: rare
   description: Health +2
   chosen: 0

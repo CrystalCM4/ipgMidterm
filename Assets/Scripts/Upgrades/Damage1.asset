@@ -16,6 +16,6 @@ MonoBehaviour:
   damageAdd: 2
   damageMult: 1.1
   healthAdd: 0
-  specificCondition: 
+  specificCondition: common
   description: Damage +2, Damage x1.1
   chosen: 0

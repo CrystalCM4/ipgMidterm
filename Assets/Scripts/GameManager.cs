@@ -28,9 +28,9 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI scoreText;
 
     //increase stat
-    public static double damageAdd = 0;
-    public static double damageMult = 1;
-    public static double enemyHealthMult = 1;
+    public static double damageAdd;
+    public static double damageMult;
+    public static double enemyHealthMult;
 
     //upgrades
     public Upgrades damage1;
@@ -39,9 +39,12 @@ public class GameManager : MonoBehaviour
     public Upgrades damage4;
     public Upgrades damage5;
     public Upgrades damage6;
+    public Upgrades damage7;
 
     public Upgrades health1;
     public Upgrades health2;
+    public Upgrades health3;
+    public Upgrades health4;
 
     public Upgrades special1;
     public Upgrades special2;
@@ -55,6 +58,7 @@ public class GameManager : MonoBehaviour
     private List<Upgrades> upgradeList = new();
     public static List<Upgrades> specialList = new();
     public static Upgrades[] options = new Upgrades[3];
+    public GameObject turret;
 
     public static bool turretSpecial;
     public static bool megaPunch;
@@ -71,7 +75,8 @@ public class GameManager : MonoBehaviour
     public static int tasteTheRainbowMult;
 
     public static float upgradeTimer;
-    public static float upgradeTimerBase = 20;
+    public static float shortTimer;
+    public static float upgradeTimerBase = 2;
     public static bool upgradePause = false;
 
 
@@ -100,8 +105,8 @@ public class GameManager : MonoBehaviour
 
         //put upgrades in list
         upgradeList = new List<Upgrades>{
-            damage1, damage2, damage3, damage4, damage5, damage6,
-            health1, health2
+            damage1, damage2, damage3, damage4, damage5, damage6, damage7,
+            health1, health2, health3, health4
         };
 
         specialList = new List<Upgrades>{
@@ -112,6 +117,13 @@ public class GameManager : MonoBehaviour
             specialList[i].chosen = false;
         }
 
+        shortTimer = 0;
+
+        //reset multipliers
+        damageAdd = 0;
+        damageMult = 1;
+        enemyHealthMult = 1;
+        
         //reset upgrade booleans
         turretSpecial = false;
         megaPunch = false;
@@ -187,7 +199,7 @@ public class GameManager : MonoBehaviour
         if (upgradeTimer <= 0 && !upgradePause){
             
             //make enemies stronger
-            enemyHealthMult += score / 1000;
+            enemyHealthMult += score / 800;
 
             int randomSelect;
 
@@ -251,7 +263,18 @@ public class GameManager : MonoBehaviour
             upgradeScreen.SetActive(false);
         }
 
+        //button activate timer
+        if (upgradePause){
+            shortTimer += Time.unscaledDeltaTime;
+        }
+        else shortTimer = 0;
+
         //upgrade check
+        if (turretSpecial){
+            Instantiate(turret, transform.position, Unity.Mathematics.quaternion.identity);
+            turretSpecial = false;
+        }
+
         if (megaPunch){
             megaPunchSizeMult = 3;
             megaPunchDamageMult = 6;

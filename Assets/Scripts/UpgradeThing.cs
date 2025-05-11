@@ -10,18 +10,50 @@ public class UpgradeThing : MonoBehaviour
     public TextMeshProUGUI descText;
     public Button selectButton;
 
+    //sprites
+    public Sprite common;
+    public Sprite rare;
+    public Sprite epic;
+    public Sprite legendary;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        selectButton.interactable = false;
         selectButton.onClick.AddListener(SelectUpgrade);
+    }
+
+    void Update()
+    {
+        if (GameManager.shortTimer >= 1){
+            selectButton.interactable = true;
+            GameManager.shortTimer = 1;
+        }
+        else {
+            selectButton.interactable = false;
+        }
     }
 
     void LateUpdate()
     {
         if (GameManager.upgradePause){
+
             //print("option " + upgradeNumber + " should have " + GameManager.options[upgradeNumber].upgradeName);
             titleText.text = GameManager.options[upgradeNumber].upgradeName;
             descText.text = GameManager.options[upgradeNumber].description;
+
+            if (GameManager.options[upgradeNumber].specificCondition.Equals("common")){
+                gameObject.GetComponent<Image>().sprite = common;
+            }
+            else if (GameManager.options[upgradeNumber].specificCondition.Equals("rare")){
+                gameObject.GetComponent<Image>().sprite = rare;
+            }
+            else if (GameManager.options[upgradeNumber].specificCondition.Equals("epic")){
+                gameObject.GetComponent<Image>().sprite = epic;
+            }
+            else {
+                gameObject.GetComponent<Image>().sprite = legendary;
+            }
         }
     }
 

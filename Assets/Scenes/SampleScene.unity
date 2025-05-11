@@ -798,8 +798,11 @@ MonoBehaviour:
   damage4: {fileID: 11400000, guid: f66740597e16b6f418a9d18ceb4a860f, type: 2}
   damage5: {fileID: 11400000, guid: 6d8d98b9eff697047bc22a10f75a46b8, type: 2}
   damage6: {fileID: 11400000, guid: 3e5a33f58b03bb348965c063801e7f41, type: 2}
+  damage7: {fileID: 11400000, guid: 52a5325a27cd7cf4fbbe0d774850310a, type: 2}
   health1: {fileID: 11400000, guid: b7df4911e339ee8498ae511a3b4c99bf, type: 2}
   health2: {fileID: 11400000, guid: ded84f865dfbfa347a88f4e516dfa119, type: 2}
+  health3: {fileID: 11400000, guid: 139a0ba511793ef4fbb87abc4ba6130c, type: 2}
+  health4: {fileID: 11400000, guid: df6237669f021ab498c07b565fc8793a, type: 2}
   special1: {fileID: 11400000, guid: 4c54c086baac2e34189f4b5ac6bd584a, type: 2}
   special2: {fileID: 11400000, guid: 38e73c7da887f444cb908790a76d6cb9, type: 2}
   special3: {fileID: 11400000, guid: fc51be1b22380fb42869720b96ba6e2b, type: 2}
@@ -3451,7 +3454,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -4668,7 +4671,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -5419,6 +5422,10 @@ MonoBehaviour:
   titleText: {fileID: 1340683592}
   descText: {fileID: 1128176226}
   selectButton: {fileID: 1040006528}
+  common: {fileID: 21300000, guid: d0084f60cdc599148b0bdb665619f521, type: 3}
+  rare: {fileID: 21300000, guid: ef1dcfd4ca16eb9498fe33d8435e9b80, type: 3}
+  epic: {fileID: 21300000, guid: e8544cfb6161618448bc294be0c830ca, type: 3}
+  legendary: {fileID: 21300000, guid: 46131f9c5d0a27c4cac07f9ccfb72361, type: 3}
 --- !u!114 &1191521775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5432,14 +5439,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6111067, g: 0.60188675, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: d0084f60cdc599148b0bdb665619f521, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5650,6 +5657,10 @@ MonoBehaviour:
   titleText: {fileID: 361959647}
   descText: {fileID: 1729763446}
   selectButton: {fileID: 1279086504}
+  common: {fileID: 21300000, guid: d0084f60cdc599148b0bdb665619f521, type: 3}
+  rare: {fileID: 21300000, guid: ef1dcfd4ca16eb9498fe33d8435e9b80, type: 3}
+  epic: {fileID: 21300000, guid: e8544cfb6161618448bc294be0c830ca, type: 3}
+  legendary: {fileID: 21300000, guid: 46131f9c5d0a27c4cac07f9ccfb72361, type: 3}
 --- !u!114 &1256311803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5663,14 +5674,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6111067, g: 0.60188675, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: d0084f60cdc599148b0bdb665619f521, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5785,7 +5796,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -7065,6 +7076,10 @@ MonoBehaviour:
   titleText: {fileID: 1289550361}
   descText: {fileID: 576248319}
   selectButton: {fileID: 605920063}
+  common: {fileID: 21300000, guid: d0084f60cdc599148b0bdb665619f521, type: 3}
+  rare: {fileID: 21300000, guid: ef1dcfd4ca16eb9498fe33d8435e9b80, type: 3}
+  epic: {fileID: 21300000, guid: e8544cfb6161618448bc294be0c830ca, type: 3}
+  legendary: {fileID: 21300000, guid: 46131f9c5d0a27c4cac07f9ccfb72361, type: 3}
 --- !u!114 &1614956328
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7078,14 +7093,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.6111067, g: 0.60188675, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: d0084f60cdc599148b0bdb665619f521, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

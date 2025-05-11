@@ -169,13 +169,6 @@ public class Bullets : MonoBehaviour
         
     }
 
-    void LateUpdate()
-    {
-        if (Player.character == 3){
-           
-        }
-    }
-
     void OnCollisionEnter(Collision col) {
         if (col.gameObject.CompareTag("Wall") && Player.character == 1){
             Destroy(gameObject);

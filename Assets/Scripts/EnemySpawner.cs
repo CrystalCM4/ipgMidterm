@@ -294,6 +294,11 @@ namespace EnemyType {
 
                 TakeDamage(incomingBT, incomingBD);   
             }
+            if (col.gameObject.CompareTag("TurretBullet")){
+                string incomingBT = col.gameObject.GetComponent<TurretBullet>().bullType;
+                int incomingBD = col.gameObject.GetComponent<TurretBullet>().bullDmg;
+                TakeDamage(incomingBT, incomingBD);   
+            }
         }
         
     }

@@ -16,6 +16,6 @@ MonoBehaviour:
   damageAdd: 0
   damageMult: 3
   healthAdd: -5
-  specificCondition: 
+  specificCondition: epic
   description: Damage x3, Health -5
   chosen: 0

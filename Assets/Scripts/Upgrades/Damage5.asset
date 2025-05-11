@@ -16,6 +16,6 @@ MonoBehaviour:
   damageAdd: 7
   damageMult: 1
   healthAdd: -1
-  specificCondition: 
+  specificCondition: rare
   description: Damage +7, Health -1
   chosen: 0
