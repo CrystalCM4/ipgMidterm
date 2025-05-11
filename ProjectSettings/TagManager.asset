@@ -11,6 +11,8 @@ TagManager:
   - Spawner1
   - Spawner2
   - Spawner3
+  - Turret
+  - TurretBullet
   layers:
   - Default
   - TransparentFX

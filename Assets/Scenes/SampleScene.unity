@@ -811,6 +811,7 @@ MonoBehaviour:
   special6: {fileID: 11400000, guid: ce9935b6450b25942bd98b66946aec09, type: 2}
   special7: {fileID: 11400000, guid: c886ae198daab4744a18cf6ccdbf41c9, type: 2}
   upgradeScreen: {fileID: 1533645089}
+  turret: {fileID: 6320745593784123179, guid: 549e6207f60ad0e4b81eaea5623947fa, type: 3}
 --- !u!4 &153288867
 Transform:
   m_ObjectHideFlags: 0

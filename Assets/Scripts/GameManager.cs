@@ -233,6 +233,7 @@ public class GameManager : MonoBehaviour
                     else {
                         bool valid = false;
                         int randomSpecial = Random.Range(0,specialList.Count);
+                        //int randomSpecial = Random.Range(0,1); //turret test
                         
                         while (!valid){
                             if (!specialList[randomSpecial].chosen){

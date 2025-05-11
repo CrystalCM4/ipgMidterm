@@ -36,25 +36,26 @@ public class TurretBullet : MonoBehaviour
         //projectileSpeed = 0;
 
         rotate -= 400 * Time.deltaTime;
-        //subGO.transform.rotation = Quaternion.Euler(rotate, 0, 0);
+        subGO.transform.rotation = Quaternion.Euler(0, 0, rotate);
+        transform.rotation = Quaternion.Euler(0, 90, 0);
 
         if (timer <= 0.6){
-            transform.Translate(projectileSpeed * Time.deltaTime, 0.0f, 0.0f);
+            transform.Translate(0.0f, 0.0f, projectileSpeed * Time.deltaTime);
         }
         else if (timer > 0.6){
-            transform.Translate(-projectileSpeed * Time.deltaTime, 0.0f, 0.0f);
+            transform.Translate(0.0f, 0.0f, -projectileSpeed * Time.deltaTime);
         }   
         else Destroy(gameObject);
     }
 
     void OnCollisionEnter(Collision col) {
 
-        if (col.gameObject.CompareTag("Turret") && Player.character == 4){
+        if (col.gameObject.CompareTag("Turret")){
             Destroy(gameObject);
             timer = 0;
         }
 
-        if (col.gameObject.CompareTag("Wall") && Player.character == 4){
+        if (col.gameObject.CompareTag("Wall")){
             if (timer >= 0.6) Destroy(gameObject);
             else timer = 0.6f;
         }
